@@ -46,7 +46,7 @@ Matplotlib & Seaborn
 Streamlit  
   
 💻 How to Run Locally  
-git clone https://github.com/sudhansu9114/churn-prediction-app.git  
+git clone https://github.com/sudhansu9114/Churn-Prediction-ML.git  
 cd churn-prediction-app  
 pip install -r requirements.txt  
 streamlit run app.py  
