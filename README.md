@@ -33,10 +33,10 @@ Churn — Whether a customer is likely to leave
   
 📈 Accuracy Scores:  
 Model	Accuracy  
-Logistic Regression	92.33%  
-K-Nearest Neighbors	95.33%  
-SVM	95.33%  
-Random Forest	100.00% ✅  
+Logistic Regression	: 92.33%  
+K-Nearest Neighbors	: 95.33%  
+Support Vector Machine	: 95.33%  
+Random Forest	: 100.00% ✅  
   
 🛠️ Tech Stack  
 Python  
