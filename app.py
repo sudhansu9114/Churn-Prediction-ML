@@ -27,7 +27,7 @@ st.set_page_config(page_title="Churn Predictor", page_icon="📉", layout="cente
 st.title("📊 Customer Churn Prediction")
 
 image = Image.open("4020769.jpg")  # Replace with your image file name
-st.image(image, use_column_width=True)
+st.image(image, use_container_width=True)
 st.markdown('<div class="subtitle">Enter customer details to check if they are likely to churn.</div>', unsafe_allow_html=True)
 
 st.divider()
