@@ -82,6 +82,7 @@ if st.button("🚀 Predict Churn"):
     # 📊 Evaluation Section
     st.divider()
     st.subheader("📈 Model Evaluation on Test Data")
+    st.divider()
 
     # Predict on test data
     y_test_pred = model.predict(Xtest)
