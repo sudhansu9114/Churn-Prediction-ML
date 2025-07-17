@@ -26,8 +26,8 @@ st.set_page_config(page_title="Churn Predictor", page_icon="📉", layout="cente
 
 st.title("📊 Customer Churn Prediction")
 
-image = Image.open("4020769.jpg")  # Replace with your image file name
-st.image(image, use_container_width=True)
+image = Image.open("images/display-image.jpg")  
+st.image(image)
 st.markdown('<div class="subtitle">Enter customer details to check if they are likely to churn.</div>', unsafe_allow_html=True)
 
 st.divider()
@@ -89,10 +89,34 @@ if st.button("🚀 Predict Churn"):
 
   
 
-    # 📊 Actual vs Predicted bar chart
-    st.markdown("#### 📊 Actual vs Predicted Counts")
-    actual_vs_pred = pd.DataFrame({'Actual': Ytest, 'Predicted': y_test_pred})
-    st.bar_chart(actual_vs_pred.value_counts().unstack(fill_value=0))
+    # # 📊 Actual vs Predicted bar chart
+    # st.markdown("#### 📊 Actual vs Predicted Counts")
+    # actual_vs_pred = pd.DataFrame({'Actual': Ytest, 'Predicted': y_test_pred})
+    # st.bar_chart(actual_vs_pred.value_counts().unstack(fill_value=0))
+    
+    # 📊 Churn Counts: Actual vs Predicted
+    st.markdown("#### 📊 Churn Counts: Actual vs Predicted")
+
+    # Count actual churn values
+    actual_counts = Ytest.value_counts().sort_index()  # 0 = No, 1 = Yes
+
+    # Count predicted churn values
+    predicted_counts = pd.Series(y_test_pred).value_counts().sort_index()
+
+    # Combine into one DataFrame
+    comparison_df = pd.DataFrame({
+        "Actual": actual_counts,
+        "Predicted": predicted_counts
+    }).rename(index={0: "No", 1: "Yes"})
+
+    # Plot using matplotlib
+    fig, ax = plt.subplots()
+    comparison_df.plot(kind="bar", ax=ax, color=["skyblue", "orange"])
+    ax.set_ylabel("Number of Customers")
+    ax.set_title("Actual vs Predicted Churn Counts")
+    plt.xticks(rotation=0)
+    st.pyplot(fig)
+
 
     # 🔲 Confusion matrix heatmap
     st.markdown("#### 🔲 Confusion Matrix")
