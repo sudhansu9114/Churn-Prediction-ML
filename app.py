@@ -17,6 +17,7 @@ scaler=pickle.load(open("scaler.pkl","rb"))
 encoders=pickle.load(open("encoders.pkl","rb"))
 Xtest = pickle.load(open("Xtest.pkl", "rb"))
 Ytest = pickle.load(open("Ytest.pkl", "rb"))
+df=pd.read_csv("customer_churn_data.csv")
 
 
 
@@ -132,6 +133,35 @@ if st.button("🚀 Predict Churn"):
     st.markdown("#### 📄 Classification Report")
     report = classification_report(Ytest, y_test_pred,output_dict=True)
     st.dataframe(pd.DataFrame(report).transpose(), use_container_width=True)
+    
+    st.markdown("### 📊 Churn Distribution")
+    churn_counts = df['Churn'].value_counts()
+    fig1, ax1 = plt.subplots()
+    ax1.pie(churn_counts, labels=['No', 'Yes'], autopct='%1.1f%%', colors=["#6fa8dc", "#e06666"])
+    ax1.set_title("Churn Distribution")
+    st.pyplot(fig1)
+    
+    st.markdown("### 📉 Contract Type vs Churn")
+    fig2, ax2 = plt.subplots()
+    pd.crosstab(df['ContractType'], df['Churn']).plot(kind='bar', ax=ax2, color=['skyblue', 'salmon'])
+    ax2.set_ylabel("Number of Customers")
+    ax2.set_title("Churn by Contract Type")
+    st.pyplot(fig2)
+    
+    st.markdown("### 💰 Monthly Charges Distribution")
+    fig3, ax3 = plt.subplots()
+    ax3.hist(df['MonthlyCharges'], bins=30, color='orange', edgecolor='black')
+    ax3.set_title("Monthly Charges")
+    ax3.set_xlabel("Charges")
+    ax3.set_ylabel("Count")
+    st.pyplot(fig3)
+
+    st.markdown("### 🔥 Feature Correlation Heatmap")
+    numeric_df = df.select_dtypes(include='number')
+    fig4, ax4 = plt.subplots(figsize=(8, 6))
+    sns.heatmap(numeric_df.corr(), annot=True, fmt=".2f", cmap="coolwarm", ax=ax4)
+    st.pyplot(fig4)
+
     
 
 with st.sidebar:
